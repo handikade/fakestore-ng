@@ -277,11 +277,67 @@
 			"prefix": "app",
 			"architect": {
 				"build": {
+					"builder": "@angular-architects/native-federation:build",
+					"options": {},
+					"configurations": {
+						"production": {
+							"target": "user:esbuild:production"
+						},
+						"development": {
+							"target": "user:esbuild:development",
+							"dev": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@angular-architects/native-federation:build",
+					"options": {
+						"target": "user:serve-original:development",
+						"rebuildDelay": 0,
+						"dev": true,
+						"port": 0
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular/build:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular/build:karma",
+					"options": {
+						"polyfills": [
+							"zone.js",
+							"zone.js/testing"
+						],
+						"tsConfig": "projects/user/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/user/public"
+							}
+						],
+						"styles": [
+							"projects/user/src/styles.scss"
+						]
+					}
+				},
+				"lint": {
+					"builder": "@angular-eslint/builder:lint",
+					"options": {
+						"lintFilePatterns": [
+							"projects/user/**/*.ts",
+							"projects/user/**/*.html"
+						]
+					}
+				},
+				"esbuild": {
 					"builder": "@angular/build:application",
 					"options": {
 						"browser": "projects/user/src/main.ts",
 						"polyfills": [
-							"zone.js"
+							"zone.js",
+							"es-module-shims"
 						],
 						"tsConfig": "projects/user/tsconfig.app.json",
 						"inlineStyleLanguage": "scss",
@@ -319,48 +375,19 @@
 					},
 					"defaultConfiguration": "production"
 				},
-				"serve": {
+				"serve-original": {
 					"builder": "@angular/build:dev-server",
 					"configurations": {
 						"production": {
-							"buildTarget": "user:build:production"
+							"buildTarget": "user:esbuild:production"
 						},
 						"development": {
-							"buildTarget": "user:build:development"
+							"buildTarget": "user:esbuild:development"
 						}
 					},
-					"defaultConfiguration": "development"
-				},
-				"extract-i18n": {
-					"builder": "@angular/build:extract-i18n"
-				},
-				"test": {
-					"builder": "@angular/build:karma",
+					"defaultConfiguration": "development",
 					"options": {
-						"polyfills": [
-							"zone.js",
-							"zone.js/testing"
-						],
-						"tsConfig": "projects/user/tsconfig.spec.json",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							{
-								"glob": "**/*",
-								"input": "projects/user/public"
-							}
-						],
-						"styles": [
-							"projects/user/src/styles.scss"
-						]
-					}
-				},
-				"lint": {
-					"builder": "@angular-eslint/builder:lint",
-					"options": {
-						"lintFilePatterns": [
-							"projects/user/**/*.ts",
-							"projects/user/**/*.html"
-						]
+						"port": 4202
 					}
 				}
 			}
