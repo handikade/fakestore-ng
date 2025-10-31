@@ -309,7 +309,11 @@
 			"architect": {
 				"build": {
 					"builder": "@angular-architects/native-federation:build",
-					"options": {},
+          "options": {
+            "styles": [
+              "projects/user/src/custom-theme.scss"
+            ]
+          },
 					"configurations": {
 						"production": {
 							"target": "user:esbuild:production"
