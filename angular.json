@@ -2,7 +2,43 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {},
+  "projects": {
+    "data": {
+      "projectType": "library",
+      "root": "projects/data",
+      "sourceRoot": "projects/data/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/data/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/data/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "projects/data/tsconfig.spec.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/data/**/*.ts",
+              "projects/data/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
   "cli": {
     "schematicCollections": [
       "@angular-eslint/schematics"
