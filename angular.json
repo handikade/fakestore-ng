@@ -178,7 +178,11 @@
 			"architect": {
 				"build": {
 					"builder": "@angular-architects/native-federation:build",
-					"options": {},
+          "options": {
+            "styles": [
+              "projects/auth/src/custom-theme.scss"
+            ]
+          },
 					"configurations": {
 						"production": {
 							"target": "auth:esbuild:production"
