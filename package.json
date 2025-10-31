@@ -22,6 +22,7 @@
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+    "@angular-architects/native-federation": "^20.1.7",
     "@angular-eslint/builder": "20.5.0",
     "@angular-eslint/eslint-plugin": "20.5.0",
     "@angular-eslint/eslint-plugin-template": "20.5.0",
