@@ -4,9 +4,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "data": [
-        "./dist/data"
-      ]
+      "data": ["./dist/data"]
     },
     "strict": true,
     "noImplicitOverride": true,
@@ -52,6 +50,12 @@
     },
     {
       "path": "./projects/user/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/dashboard/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/dashboard/tsconfig.spec.json"
     }
   ]
 }
