@@ -5,12 +5,13 @@ module.exports = withNativeFederation({
   name: 'auth',
 
   exposes: {
-    './Component': './projects/auth/src/app/app.ts',
+    './App': './projects/auth/src/app/app.ts',
+    './routes': './projects/auth/src/app/app.routes.ts',
   },
 
   shared: {
     ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
-    '@angular/common/http': { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+    data: { singleton: true, strictVersion: true, requiredVersion: 'auto' },
   },
 
   skip: [

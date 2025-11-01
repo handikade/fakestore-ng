@@ -1,9 +1,15 @@
 const { withNativeFederation, shareAll } = require('@angular-architects/native-federation/config');
 
 module.exports = withNativeFederation({
+  // remotes: {
+  //   auth: 'http://localhost:4201/federation.manifest.json',
+  //   user: 'http://localhost:4202/federation.manifest.json',
+  //   dashboard: 'http://localhost:4203/federation.manifest.json',
+  // },
 
   shared: {
     ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
+    data: { singleton: true, strictVersion: true, requiredVersion: 'auto' },
   },
 
   skip: [

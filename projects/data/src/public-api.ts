@@ -8,6 +8,7 @@ export * from './lib/data.tokens';
 // Auth
 export * from './lib/auth/domain/auth.models';
 export * from './lib/auth/domain/auth.repository';
+export * from './lib/auth/infra/auth.remote-datasource';
 export * from './lib/auth/infra/auth.repository.impl';
 
 // Users
