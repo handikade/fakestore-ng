@@ -1,13 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ViewChild, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-// import { MatCardModule } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-// import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-// import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatCardModule } from '@angular/material/card';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
@@ -32,10 +29,16 @@ import type { User } from 'data';
   template: `
     <div class="page">
       <mat-card class="card">
-        <h2>Users (Lazy Loaded)</h2>
+        <h2>Users</h2>
 
-        @if (!loading()) {
-          <div class="table-wrapper">
+        <div class="example-container mat-elevation-z8">
+          @if (loading()) {
+            <div class="example-loading-shade">
+              <mat-spinner></mat-spinner>
+            </div>
+          }
+
+          <div class="example-table-container">
             <table mat-table [dataSource]="users()" class="mat-elevation-z1">
               <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef>#</th>
@@ -66,19 +69,15 @@ import type { User } from 'data';
               <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
             </table>
           </div>
-        } @else {
-          <div class="loading">
-            <mat-spinner diameter="48"></mat-spinner>
-          </div>
-        }
 
-        <mat-paginator
-          [length]="totalCount()"
-          [pageSize]="pageSize()"
-          [pageSizeOptions]="[5, 10, 20]"
-          (page)="onPage($event)"
-          showFirstLastButtons
-        />
+          <mat-paginator
+            [length]="totalCount()"
+            [pageSize]="pageSize()"
+            [pageSizeOptions]="[5, 10, 20]"
+            (page)="onPage($event)"
+            showFirstLastButtons
+          />
+        </div>
       </mat-card>
     </div>
   `,
@@ -87,18 +86,43 @@ import type { User } from 'data';
       .page {
         padding: 24px;
       }
-      .table-wrapper {
+
+      .example-container {
+        position: relative;
+      }
+      .example-table-container {
+        position: relative;
+        min-height: 200px;
+        max-height: 400px;
         overflow: auto;
       }
-      .loading {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 200px;
-      }
+
       table {
         width: 100%;
-        min-width: 720px;
+      }
+
+      .example-loading-shade {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 56px;
+        right: 0;
+        background: rgba(0, 0, 0, 0.15);
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .example-rate-limit-reached {
+        max-width: 360px;
+        text-align: center;
+      }
+      .mat-column-number,
+      .mat-column-state {
+        width: 64px;
+      }
+      .mat-column-created {
+        width: 124px;
       }
     `,
   ],
@@ -131,6 +155,7 @@ export class List implements AfterViewInit {
     const limit = pageSize;
 
     const users = await this._usersRepository.get({ offset, limit });
+    console.log('users', { users });
 
     this.users.set(users ?? []);
     this.pageIndex.set(pageIndex);
