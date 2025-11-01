@@ -32,3 +32,12 @@ export * from './lib/users/repositories/users.repository';
 export * from './lib/users/types/user.type';
 export * from './lib/users/users.token';
 // #endregion USERS
+
+// #region CARTS
+export * from './lib/carts/carts.token';
+export * from './lib/carts/provide';
+export * from './lib/carts/repositories/carts.http.repository';
+export * from './lib/carts/repositories/carts.local.repository';
+export * from './lib/carts/repositories/carts.repository';
+export * from './lib/carts/types/cart.type';
+// #endregion CARTS
