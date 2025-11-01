@@ -3,16 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "lint": "ng lint",
-    "serve:all": "npm-run-all --parallel serve:auth serve:dashboard serve:user --sequential serve:host",
+    "serve:remotes": "npm-run-all --parallel serve:auth serve:dashboard serve:user",
     "serve:auth": "ng serve auth",
     "serve:dashboard": "ng serve dashboard",
     "serve:user": "ng serve user",
-    "serve:host": "ng serve host"
+    "serve": "ng serve host"
   },
   "private": true,
   "dependencies": {
