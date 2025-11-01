@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { USERS_REPOSITORY } from 'data';
 
@@ -29,7 +30,9 @@ import type { User } from 'data';
   template: `
     <div class="page">
       <mat-card class="card">
-        <h2>Users</h2>
+        <div class="header">
+          <h2>Users</h2>
+        </div>
 
         <div class="example-container mat-elevation-z8">
           @if (loading()) {
@@ -63,6 +66,13 @@ import type { User } from 'data';
               <ng-container matColumnDef="phone">
                 <th mat-header-cell *matHeaderCellDef>Phone</th>
                 <td mat-cell *matCellDef="let u">{{ u.phone }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef></th>
+                <td mat-cell *matCellDef="let u">
+                  <button mat-stroked-button color="primary" (click)="view(u)">View</button>
+                </td>
               </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -101,6 +111,13 @@ import type { User } from 'data';
         width: 100%;
       }
 
+      .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+      }
+
       .example-loading-shade {
         position: absolute;
         top: 0;
@@ -129,6 +146,8 @@ import type { User } from 'data';
 })
 export class List implements AfterViewInit {
   private readonly _usersRepository = inject(USERS_REPOSITORY);
+  private readonly _router = inject(Router);
+  private readonly _route = inject(ActivatedRoute);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -138,7 +157,7 @@ export class List implements AfterViewInit {
   pageIndex = signal(0);
   pageSize = signal(5);
 
-  displayedColumns: string[] = ['id', 'username', 'email', 'city', 'phone'];
+  displayedColumns: string[] = ['id', 'username', 'email', 'city', 'phone', 'actions'];
 
   ngAfterViewInit() {
     this.loadPage(0, this.pageSize());
@@ -147,6 +166,10 @@ export class List implements AfterViewInit {
   onPage(event: PageEvent) {
     console.log('onPage', { event });
     this.loadPage(event.pageIndex, event.pageSize);
+  }
+
+  view(user: User) {
+    this._router.navigate([user.id], { relativeTo: this._route });
   }
 
   private async loadPage(pageIndex: number, pageSize: number) {
