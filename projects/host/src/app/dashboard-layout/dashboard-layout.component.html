@@ -1,0 +1,43 @@
+<mat-sidenav-container class="layout">
+  <mat-sidenav #sidenav class="sidebar" mode="side" opened>
+    <header class="sidebar__header">
+      <span class="sidebar__title">Fakestore</span>
+    </header>
+
+    <mat-nav-list>
+      @for (link of links(); track link.path) {
+        <a
+          mat-list-item
+          [routerLink]="link.path"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: link.exact ?? false }"
+          (click)="sidenav.mode === 'over' && sidenav.close()"
+        >
+          {{ link.label }}
+        </a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="toolbar">
+      <button
+        type="button"
+        mat-icon-button
+        class="toolbar__menu"
+        aria-label="Toggle navigation"
+        (click)="sidenav.toggle()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <span class="toolbar__title">Dashboard</span>
+      <span class="toolbar__spacer"></span>
+      <a mat-button routerLink="/auth">Log out</a>
+    </mat-toolbar>
+
+    <main class="content">
+      <router-outlet />
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
