@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { AuthRepository } from 'data';
+import { AUTH_REPOSITORY } from 'data';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,7 @@ import { AuthRepository } from 'data';
 })
 export class Login {
   private readonly _fb = inject(FormBuilder);
-  private readonly _auth = inject(AuthRepository);
+  private readonly _auth = inject(AUTH_REPOSITORY);
 
   loginForm = this._fb.group({
     username: this._fb.control<string>('', {
