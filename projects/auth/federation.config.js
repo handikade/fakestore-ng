@@ -26,10 +26,8 @@ module.exports = withNativeFederation({
   // https://shorturl.at/jmzH0
 
   features: {
-    // New feature for more performance and avoiding
-    // issues with node libs. Comment this out to
-    // get the traditional behavior:
-    ignoreUnusedDeps: true
+    // Keep unused shared chunks in the bundle so import map entries exist at runtime.
+    ignoreUnusedDeps: false
   }
   
 });
