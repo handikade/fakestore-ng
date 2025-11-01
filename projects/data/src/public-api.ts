@@ -23,3 +23,12 @@ export * from './lib/products/repositories/products.local.repository';
 export * from './lib/products/repositories/products.repository';
 export * from './lib/products/types/product.type';
 // #endregion PRODUCTS
+
+// #region USERS
+export * from './lib/users/provide';
+export * from './lib/users/repositories/users.http.repository';
+export * from './lib/users/repositories/users.local.repository';
+export * from './lib/users/repositories/users.repository';
+export * from './lib/users/types/user.type';
+export * from './lib/users/users.token';
+// #endregion USERS
