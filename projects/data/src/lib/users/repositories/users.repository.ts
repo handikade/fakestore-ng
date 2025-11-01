@@ -16,4 +16,11 @@ export interface UsersRepository {
    * @returns A promise that resolves with the user or null if the user is not found or the request fails.
    */
   getById(id: number): Promise<User | null>;
+
+  /**
+   *
+   * @param payload
+   * @returns
+   */
+  get(payload: { offset: number; limit: number }): Promise<User[] | null>;
 }

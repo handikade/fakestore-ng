@@ -36,4 +36,17 @@ export class UsersHttpRepository implements UsersRepository {
 
     return lastValueFrom(api$);
   }
+
+  get(payload: { offset: number; limit: number }): Promise<User[] | null> {
+    const { offset, limit } = payload;
+
+    const api$ = this._http.get<User[]>(`${this._url}?offset=${offset}&limit=${limit}`).pipe(
+      catchError(() => {
+        console.error('Failed to get users with pagination');
+        return of(null);
+      }),
+    );
+
+    return lastValueFrom(api$);
+  }
 }

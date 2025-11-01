@@ -64,4 +64,11 @@ export class UsersLocalRepository implements UsersRepository {
     const user = MOCK_USERS.find((u) => u.id === id) ?? null;
     return Promise.resolve(user);
   }
+
+  get(payload: { offset: number; limit: number }): Promise<User[] | null> {
+    const { offset, limit } = payload;
+    const users = MOCK_USERS.slice(offset, offset + limit);
+
+    return Promise.resolve(users);
+  }
 }
