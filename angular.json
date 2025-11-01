@@ -48,9 +48,7 @@
       "architect": {
         "build": {
           "builder": "@angular-architects/native-federation:build",
-          "options": {
-            "styles": ["projects/host/src/custom-theme.scss"]
-          },
+          "options": {},
           "configurations": {
             "production": {
               "target": "host:esbuild:production"
@@ -164,9 +162,7 @@
       "architect": {
         "build": {
           "builder": "@angular-architects/native-federation:build",
-          "options": {
-            "styles": ["projects/auth/src/custom-theme.scss"]
-          },
+          "options": {},
           "configurations": {
             "production": {
               "target": "auth:esbuild:production"
@@ -280,9 +276,7 @@
       "architect": {
         "build": {
           "builder": "@angular-architects/native-federation:build",
-          "options": {
-            "styles": ["projects/user/src/custom-theme.scss"]
-          },
+          "options": {},
           "configurations": {
             "production": {
               "target": "user:esbuild:production"
