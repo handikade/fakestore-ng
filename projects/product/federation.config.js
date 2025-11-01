@@ -2,18 +2,16 @@ const { withNativeFederation, shareAll } = require('@angular-architects/native-f
 
 module.exports = withNativeFederation({
 
-  name: 'auth',
+  name: 'product',
 
   exposes: {
-    './App': './projects/auth/src/app/app.ts',
-    './routes': './projects/auth/src/app/app.routes.ts',
+    './App': './projects/product/src/app/app.ts',
+    './routes': './projects/product/src/app/app.routes.ts',
   },
 
   shared: {
     ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
   },
-
-  sharedMappings: ['data'],
 
   skip: [
     'rxjs/ajax',

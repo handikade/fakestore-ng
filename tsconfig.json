@@ -56,6 +56,12 @@
     },
     {
       "path": "./projects/dashboard/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/product/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/product/tsconfig.spec.json"
     }
   ]
 }

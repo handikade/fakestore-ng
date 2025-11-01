@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "serve:remotes": "npm-run-all --parallel serve:auth serve:dashboard serve:user",
+    "serve:remotes": "npm-run-all --parallel serve:auth serve:dashboard serve:user serve:product",
     "serve:auth": "ng serve auth",
     "serve:dashboard": "ng serve dashboard",
     "serve:user": "ng serve user",
+    "serve:product": "ng serve product",
     "serve": "ng serve host"
   },
   "private": true,
@@ -49,6 +50,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "ng-packagr": "^20.3.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^3.6.2",
     "typescript": "~5.9.2"
   }

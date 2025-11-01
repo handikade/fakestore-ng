@@ -20,6 +20,12 @@ export const routes: Routes = [
   },
 
   {
+    path: 'product',
+    loadComponent: () => loadRemoteModule('product', './App').then((m) => m.App),
+    loadChildren: () => loadRemoteModule('product', './routes').then((m) => m.routes),
+  },
+
+  {
     path: '**',
     redirectTo: 'auth',
   },

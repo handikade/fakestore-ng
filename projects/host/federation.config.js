@@ -9,8 +9,9 @@ module.exports = withNativeFederation({
 
   shared: {
     ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
-    data: { singleton: true, strictVersion: true, requiredVersion: 'auto' },
   },
+
+  sharedMappings: ['data'],
 
   skip: [
     'rxjs/ajax',
