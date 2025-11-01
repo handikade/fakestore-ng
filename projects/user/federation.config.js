@@ -6,10 +6,12 @@ module.exports = withNativeFederation({
 
   exposes: {
     './App': './projects/user/src/app/app.ts',
+    './routes': './projects/user/src/app/app.routes.ts',
   },
 
   shared: {
     ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
+    data: { singleton: true, strictVersion: true, requiredVersion: 'auto' },
   },
 
   skip: [

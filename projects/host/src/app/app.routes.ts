@@ -16,6 +16,7 @@ export const routes: Routes = [
   {
     path: 'user',
     loadComponent: () => loadRemoteModule('user', './App').then((m) => m.App),
+    loadChildren: () => loadRemoteModule('user', './routes').then((m) => m.routes),
   },
 
   {
